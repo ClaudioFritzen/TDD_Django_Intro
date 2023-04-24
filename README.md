@@ -127,3 +127,64 @@ def test_string_rep_of_objects(self):
 
 
 
+
+## testando a homeview
+
+from http import HTTPStatus
+
+class HomepageTest(TestCase):
+    
+    def setUp(self) -> None:
+        Post.objects.create(
+            title="teste post 1",
+            body='Este é um teste para o post 1'
+        )
+
+        Post.objects.create(
+            title='Teste de post 2',
+            body='Teste de post para post 2'
+        )
+
+    def test_homepage_return_correct_response(self):
+        response = self.client.get('/')
+
+        self.assertTemplateUsed(response, 'posts/index.html')
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
+## criado o test, erro esperado. 
+
+AssertionError: No templates used to render the response
+
+## Agora iremos criar esse html
+
+## mudaremos em settings.py
+"DIRS": [BASE_DIR / 'templates'],
+
+e criaremos a seguinte pasta no root do projeto
+
+templates/posts/index.html
+
+# agora vamos pra views.py de posts
+ Crie a função
+    def index(request):
+    return render(request, "posts/index.html")
+# Crie a urls.py
+    Crie a rota para home views
+
+        from django.urls import path
+from . import views
+
+
+
+urlpatterns = [
+    path('', views.index, name='homepage'),
+]
+
+
+# na pasta princal redirecione para posts.urls
+    path('', include('posts.urls')),
+
+
+## Rode os teste e é pra funcionar
+
+py manage.py test
