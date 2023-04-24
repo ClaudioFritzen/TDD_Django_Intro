@@ -1,7 +1,8 @@
 from django.test import TestCase
 
-
 from .models import Post
+
+from http import HTTPStatus
 # Create your tests here.
 
 """ class PostModelTest(TestCase):
@@ -30,4 +31,23 @@ class PostModelTest(TestCase):
         ## os outros dois itens não precisa ser declarado
             # pois pegaram a data de agora
 
-        
+## home page
+
+class HomepageTest(TestCase):
+    
+    def setUp(self) -> None:
+        Post.objects.create(
+            title="teste post 1",
+            body='Este é um teste para o post 1'
+        )
+
+        Post.objects.create(
+            title='Teste de post 2',
+            body='Teste de post para post 2'
+        )
+
+    def test_homepage_return_correct_response(self):
+        response = self.client.get('/')
+
+        self.assertTemplateUsed(response, 'posts/index.html')
+        self.assertEqual(response.status_code, HTTPStatus.OK)
