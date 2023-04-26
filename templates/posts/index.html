@@ -8,5 +8,17 @@
 </head>
 <body>
     <h1> Hello World!!! </h1>
+
+    <h3> Welcome to the blog </h3>
+    <h2> These are the lastest posts </h2>
+
+    {% for post in posts %}
+        <div class="post">
+            <a href="#"> {{post.title}}</a>
+            <p>{{post.body}}</p>
+
+        </div>
+
+    {% endfor %}
 </body>
 </html>

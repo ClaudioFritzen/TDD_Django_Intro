@@ -54,5 +54,4 @@ class HomepageTest(TestCase):
         response = self.client.get("/")
 
         self.assertContains(response, "teste post 1")
-        self.assertContains(response, "teste post 2")
-        
+        self.assertContains(response, "Teste de post 2")
