@@ -60,14 +60,16 @@ class HomepageTest(TestCase):
 ## aula 4
 
 class DetailPageTest(TestCase):
-    self.post = Post.objects.create(
+    
+    def setUp(self) -> None:
+        self.post = Post.objects.create(
         title = 'Couse of js',
         body='Curso para iniciante em JS'
-    )
+        )
 
     def test_detail_page_return_correct_response(self):
 
-        response = self.client(f'post/{self.id}')
+        response = self.client.get(f'post/{self.id}')
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'posts/datail.html')
