@@ -69,7 +69,7 @@ class DetailPageTest(TestCase):
 
     def test_detail_page_return_correct_response(self):
 
-        response = self.client.get(f'post/{self.id}')
+        response = self.client.get(self.post.get_absolute_url())
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'posts/detail.html')
