@@ -72,4 +72,4 @@ class DetailPageTest(TestCase):
         response = self.client.get(f'post/{self.id}')
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, 'posts/datail.html')
+        self.assertTemplateUsed(response, 'posts/detail.html')
