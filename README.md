@@ -188,3 +188,37 @@ urlpatterns = [
 ## Rode os teste e é pra funcionar
 
 py manage.py test
+
+
+
+## aula 4 
+
+# Criando nosso teste para 
+class DetailPageTest(TestCase):
+    
+    def setUp(self) -> None:
+        self.post = Post.objects.create(
+        title = 'Couse of js',
+        body='Curso para iniciante em JS'
+        )
+
+    def test_detail_page_return_correct_response(self):
+
+        response = self.client.get(f'post/{self.id}')
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, 'posts/datail.html')
+
+Iremos criar um teste para ver se está apresentando os detalhes do nosso post, para isso. O nossa resposta esperada será um erro 404.
+
+# Agora criaremos a views de detail passando id 
+    Por que faremos isso, quando queremos saber mais detalhes sobre um post temos que pegar o numero da pk (chave primaria) definida quando criamos o post. Para mais informações abra o banco de dados, e olhe o numero do id que será unico no banco.
+
+# Crie a rota para redirecionamento do produto desejado.
+    path('post/<int:id>/', views.post_detail, name='post_detail'),
+
+
+# notasse se rodarmos o test ainda aparecerar o mesmo erro de 404
+
+# crieremos o template html para renderizar o html
+
