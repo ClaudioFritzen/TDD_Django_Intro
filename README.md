@@ -221,4 +221,30 @@ Iremos criar um teste para ver se está apresentando os detalhes do nosso post, 
 # notasse se rodarmos o test ainda aparecerar o mesmo erro de 404
 
 # crieremos o template html para renderizar o html
+    mesmo criando o template html o erro persiste.
+
+# trabalharemos na models
+    abaixo de função. criemos outra
+
+     def get_absolute_url(self):
+        return reverse("post_detail", kwargs={"id": self.pk})
+
+# agora voltamos no teste e removemos f'string' e deixaremos a rota dinaminca com get.absolute()
+
+class DetailPageTest(TestCase):
+    
+    def setUp(self) -> None:
+        self.post = Post.objects.create(
+        title = 'Couse of js',
+        body='Curso para iniciante em JS'
+        )
+
+    def test_detail_page_return_correct_response(self):
+
+## alteração foi nesta linha
+        response = self.client.get(self.post.get_absolute_url())
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, 'posts/detail.html')
+    
 
